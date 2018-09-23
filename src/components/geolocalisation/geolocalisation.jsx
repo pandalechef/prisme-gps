@@ -41,13 +41,17 @@ class Geolocalisation extends React.Component {
       latitude: undefined,
       longitude: undefined,
       accuracy: undefined,
-      err: undefined
+      err: undefined,
+      positionReelle: []
     };
     this.handleClick = this.handleClick.bind(this);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.majCasDeTest = this.majCasDeTest.bind(this);
     this.majReseau = this.majReseau.bind(this);
+    this.onMajPosReelle = this.onMajPosReelle.bind(this);
+    this.convertRad = this.convertRad.bind(this);
+    this.distance = this.distance.bind(this);
   }
 
   handleClick() {
@@ -90,6 +94,35 @@ class Geolocalisation extends React.Component {
 
   majReseau(reseau) {
     this.setState({ reseau });
+  }
+
+  onMajPosReelle(lat, lng) {
+    this.setState({ positionReelle: [lat, lng] });
+
+    console.log(
+      this.distance(lat, lng, this.state.latitude, this.state.longitude)
+    );
+  }
+
+  convertRad(input) {
+    return Math.PI * input / 180;
+  }
+  distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre) {
+    const R = 6378000; //Rayon de la terre en mètre
+
+    const lat_a = this.convertRad(lat_a_degre);
+    const lon_a = this.convertRad(lon_a_degre);
+    const lat_b = this.convertRad(lat_b_degre);
+    const lon_b = this.convertRad(lon_b_degre);
+
+    return (
+      R *
+      (Math.PI / 2 -
+        Math.asin(
+          Math.sin(lat_b) * Math.sin(lat_a) +
+            Math.cos(lon_b - lon_a) * Math.cos(lat_b) * Math.cos(lat_a)
+        ))
+    );
   }
 
   render() {
@@ -150,7 +183,12 @@ class Geolocalisation extends React.Component {
           </div>}
         {typeof this.state.latitude === 'number' &&
           typeof this.state.longitude === 'number' &&
-          <Carte lat={this.state.latitude} lng={this.state.longitude} />}
+          <Carte
+            lat={this.state.latitude}
+            lng={this.state.longitude}
+            accuracy={this.state.accuracy}
+            onMajPosReelle={this.onMajPosReelle}
+          />}
       </div>
     );
   }
