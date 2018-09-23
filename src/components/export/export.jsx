@@ -39,6 +39,7 @@ class Export extends Component {
       );
     }
     const headers = [
+      { label: 'Réseau', key: 'reseau' },
       { label: 'Cas de test', key: 'casDeTest' },
       { label: 'Date', key: 'date' },
       { label: 'Latitude', key: 'latitude' },
@@ -62,6 +63,7 @@ class Export extends Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
+                <TableCell>Réseau</TableCell>
                 <TableCell>Cas de test</TableCell>
                 <TableCell> Date </TableCell>
                 <TableCell numeric>Latitude</TableCell>
@@ -73,6 +75,7 @@ class Export extends Component {
               {this.props.releves.map((row, id) => {
                 return (
                   <TableRow key={id}>
+                    <TableCell>{row.reseau}</TableCell>
                     <TableCell>{row.casDeTest}</TableCell>
                     <TableCell>{row.date}</TableCell>
                     <TableCell numeric>{row.latitude}</TableCell>

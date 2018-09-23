@@ -39,12 +39,12 @@ class SimpleTabs extends React.Component {
     this.setState({ value });
   };
 
-  ajoutReleve = (casDeTest, latitude, longitude, accuracy) => {
+  ajoutReleve = (reseau, casDeTest, latitude, longitude, accuracy) => {
     const date = new Date().toLocaleString();
     this.setState({
       releves: [
         ...this.state.releves,
-        { casDeTest, latitude, longitude, accuracy, date }
+        { reseau, casDeTest, latitude, longitude, accuracy, date }
       ]
     });
   };

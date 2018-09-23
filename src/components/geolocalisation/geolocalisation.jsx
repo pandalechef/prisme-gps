@@ -13,6 +13,9 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap'
   },
+  button: {
+    padding: 15
+  },
   paper: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
@@ -33,6 +36,7 @@ class Geolocalisation extends React.Component {
     super(props);
     this.state = {
       casDeTest: this.props.casDeTest[0],
+      reseau: this.props.reseau[0],
       latitude: undefined,
       longitude: undefined,
       accuracy: undefined,
@@ -62,6 +66,7 @@ class Geolocalisation extends React.Component {
       accuracy: crd.accuracy
     });
     this.props.ajoutReleve(
+      this.state.reseau,
       this.state.casDeTest,
       crd.latitude,
       crd.longitude,
@@ -87,7 +92,7 @@ class Geolocalisation extends React.Component {
   }
 
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <Reseau reseau={this.props.reseau} majReseau={this.majReseau} />
@@ -101,6 +106,7 @@ class Geolocalisation extends React.Component {
             variant="contained"
             color="primary"
             onClick={this.handleClick}
+            className={classes.button}
           >
             Geolocalisation
             <AddLocation className={classes.rightIcon} />
