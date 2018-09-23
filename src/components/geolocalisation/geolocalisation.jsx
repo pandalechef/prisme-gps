@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import CasTest from '../cas-test';
 import Reseau from '../reseau';
+import Carte from '../carte';
 
 const styles = theme => ({
   root: {
@@ -147,7 +148,9 @@ class Geolocalisation extends React.Component {
               variant="outlined"
             />
           </div>}
-
+        {this.state.latitude &&
+          this.state.longitude &&
+          <Carte lat={this.state.latitude} lng={this.state.longitude} />}
       </div>
     );
   }
