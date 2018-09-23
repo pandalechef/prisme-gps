@@ -6,10 +6,12 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import CasTest from '../cas-test';
+import Reseau from '../reseau';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -40,6 +42,7 @@ class Geolocalisation extends React.Component {
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.majCasDeTest = this.majCasDeTest.bind(this);
+    this.majReseau = this.majReseau.bind(this);
   }
 
   handleClick() {
@@ -79,10 +82,15 @@ class Geolocalisation extends React.Component {
     this.setState({ casDeTest });
   }
 
+  majReseau(reseau) {
+    this.setState({ reseau });
+  }
+
   render() {
     const classes = this.props;
     return (
       <div className={classes.root}>
+        <Reseau reseau={this.props.reseau} majReseau={this.majReseau} />
         <CasTest
           casDeTest={this.props.casDeTest}
           majCasDeTest={this.majCasDeTest}

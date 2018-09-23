@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -6,11 +7,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
   root: {},
-  formControl: {
-    margin: theme.spacing.unit * 3
-  },
+
   select: {
-    width: '99px'
+    marginRight: theme.spacing.unit * 3
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
@@ -24,25 +23,26 @@ class CasTest extends Component {
 
   handleChangeSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
-    this.props.majCasDeTest(this.props.casDeTest[event.target.value]);
+    this.props.majReseau(this.props.reseau[event.target.value]);
   };
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
+
     return (
       <FormControl className={classes.formControl}>
-        Cas de test
+        Condition réseau
         <br />
         <Select
           className={classes.select}
           value={this.state.castest}
           onChange={this.handleChangeSelect}
           inputProps={{
-            name: 'castest',
-            id: 'castest'
+            name: 'reseau',
+            id: 'reseau'
           }}
         >
-          {this.props.casDeTest.map((cas, index) => (
-            <MenuItem key={index} value={index}>{cas}</MenuItem>
+          {this.props.reseau.map((reseau, index) => (
+            <MenuItem key={index} value={index}>{reseau}</MenuItem>
           ))}
 
         </Select>
@@ -52,4 +52,7 @@ class CasTest extends Component {
   }
 }
 
+CasTest.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 export default withStyles(styles)(CasTest);

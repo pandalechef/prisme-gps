@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class Export extends Component {
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
     if (this.props.releves.length === 0) {
       return (
         <Paper className={classes.root} elevation={1}>

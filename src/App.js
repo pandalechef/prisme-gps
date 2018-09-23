@@ -31,7 +31,8 @@ class SimpleTabs extends React.Component {
   state = {
     value: 0,
     releves: [],
-    casDeTest: ['dehors', 'bar']
+    casDeTest: ['dehors', 'bar'],
+    reseau: ['SIM voix+data', 'SIM data']
   };
 
   handleChange = (event, value) => {
@@ -51,6 +52,9 @@ class SimpleTabs extends React.Component {
   ajouterCasDeTest = nouveauCas => {
     this.setState({ casDeTest: [...this.state.casDeTest, nouveauCas] });
   };
+  ajouterReseau = nouveauReseau => {
+    this.setState({ reseau: [...this.state.reseau, nouveauReseau] });
+  };
 
   render() {
     const { classes } = this.props;
@@ -62,13 +66,14 @@ class SimpleTabs extends React.Component {
           <Tabs value={value} onChange={this.handleChange} centered>
             <Tab label="Géolocalisation" />
             <Tab label="Export" />
-            <Tab label="Parametre" />
+            <Tab label="Paramètres" />
           </Tabs>
         </AppBar>
         {value === 0 &&
           <TabContainer>
             <Geolocalisation
               casDeTest={this.state.casDeTest}
+              reseau={this.state.reseau}
               ajoutReleve={this.ajoutReleve}
             />
           </TabContainer>}
@@ -78,7 +83,10 @@ class SimpleTabs extends React.Component {
           </TabContainer>}
         {value === 2 &&
           <TabContainer>
-            <Parametres ajouterCasDeTest={this.ajouterCasDeTest} />
+            <Parametres
+              ajouterCasDeTest={this.ajouterCasDeTest}
+              ajouterReseau={this.ajouterReseau}
+            />
           </TabContainer>}
       </div>
     );

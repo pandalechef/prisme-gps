@@ -24,7 +24,16 @@ const styles = theme => ({
 
 class Parametres extends Component {
   state = {
-    nouveauCasTest: ''
+    nouveauCasTest: '',
+    nouveauReseau: ''
+  };
+
+  handleChangeNouveauReseau = event => {
+    this.setState({ nouveauReseau: event.target.value });
+  };
+
+  handleClickReseau = () => {
+    this.props.ajouterReseau(this.state.nouveauReseau);
   };
 
   handleChangeNouveauCasTest = event => {
@@ -40,9 +49,28 @@ class Parametres extends Component {
     return (
       <React.Fragment>
         <fieldset>
+          <legend>Ajouter une condition de réseau</legend>
+          <TextField
+            label="Nouvelle condition"
+            className={classes.textField}
+            value={this.state.nouveauReseau}
+            onChange={this.handleChangeNouveauReseau}
+            margin="normal"
+          />
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={this.handleClickReseau}
+          >
+            ajouter
+            <Add />
+          </Button>
+        </fieldset>
+        <br />
+        <fieldset>
           <legend>Ajouter un cas de test</legend>
           <TextField
-            id="standard-name"
             label="Nouveau cas"
             className={classes.textField}
             value={this.state.nouveauCasTest}
