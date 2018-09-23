@@ -148,8 +148,8 @@ class Geolocalisation extends React.Component {
               variant="outlined"
             />
           </div>}
-        {this.state.latitude &&
-          this.state.longitude &&
+        {typeof this.state.latitude === 'number' &&
+          typeof this.state.longitude === 'number' &&
           <Carte lat={this.state.latitude} lng={this.state.longitude} />}
       </div>
     );
