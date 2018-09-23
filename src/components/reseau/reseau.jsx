@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class CasTest extends Component {
   state = {
-    castest: 0
+    reseau: 0
   };
 
   handleChangeSelect = event => {
@@ -34,7 +34,7 @@ class CasTest extends Component {
         <br />
         <Select
           className={classes.select}
-          value={this.state.castest}
+          value={this.state.reseau}
           onChange={this.handleChangeSelect}
           inputProps={{
             name: 'reseau',

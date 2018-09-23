@@ -42,7 +42,8 @@ class Geolocalisation extends React.Component {
       longitude: undefined,
       accuracy: undefined,
       err: undefined,
-      positionReelle: []
+      positionReelle: [],
+      distance2points: undefined
     };
     this.handleClick = this.handleClick.bind(this);
     this.success = this.success.bind(this);
@@ -99,9 +100,14 @@ class Geolocalisation extends React.Component {
   onMajPosReelle(lat, lng) {
     this.setState({ positionReelle: [lat, lng] });
 
-    console.log(
-      this.distance(lat, lng, this.state.latitude, this.state.longitude)
-    );
+    this.setState({
+      distance2points: this.distance(
+        lat,
+        lng,
+        this.state.latitude,
+        this.state.longitude
+      )
+    });
   }
 
   convertRad(input) {
@@ -180,6 +186,17 @@ class Geolocalisation extends React.Component {
               }}
               variant="outlined"
             />
+            {this.state.distance2points &&
+              <TextField
+                label="Erreur distance"
+                value={this.state.distance2points}
+                className={classes.textField}
+                margin="normal"
+                InputProps={{
+                  readOnly: true
+                }}
+                variant="outlined"
+              />}
           </div>}
         {typeof this.state.latitude === 'number' &&
           typeof this.state.longitude === 'number' &&

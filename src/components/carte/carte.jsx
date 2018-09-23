@@ -46,7 +46,7 @@ export default class Carte extends Component {
               <span>Je pense que je suis là</span>
             </Popup>
           </Marker>}
-        {this.props.accuracy &&
+        {/* {this.props.accuracy &&
           <CircleMarker
             center={L.latLng(this.props.lat, this.props.lng)}
             radius={this.props.accuracy}
@@ -56,7 +56,7 @@ export default class Carte extends Component {
             <Popup>
               <span>rayon de précision</span>
             </Popup>
-          </CircleMarker>}
+          </CircleMarker>} */}
       </Map>
     );
   }
