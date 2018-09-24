@@ -4,6 +4,7 @@ import Add from "@material-ui/icons/Add";
 import Delete from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import ConfirmerSuppression from "../confirmer-suppression";
 
 const styles = theme => ({
   container: {
@@ -93,15 +94,10 @@ class Parametres extends Component {
         </fieldset>
         <br />
         <br />
-        <Button
-          size="large"
-          variant="contained"
-          color="secondary"
-          onClick={this.handleClickDelete}
-        >
-          Effacer toutes les données!
-          <Delete />
-        </Button>
+        <ConfirmerSuppression
+          texte=" Effacer toutes les données"
+          action={this.handleClickDelete}
+        />
       </React.Fragment>
     );
   }

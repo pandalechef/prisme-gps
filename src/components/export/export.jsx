@@ -9,10 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { CSVLink } from "react-csv";
 import GetApp from "@material-ui/icons/GetApp";
-import Delete from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import ConfirmerSuppression from "../confirmer-suppression";
 const styles = theme => ({
   root: {
     width: "100%",
@@ -47,7 +46,7 @@ class Export extends Component {
       { label: "Latitude", key: "latitude" },
       { label: "Longitude", key: "longitude" },
       { label: "Précision", key: "accuracy" },
-      { label: "Erreur de Mesure", key: "erreurMesure" }
+      { label: "Ecart position GPS et réelle ", key: "erreurMesure" }
     ];
     return (
       <React.Fragment>
@@ -72,7 +71,9 @@ class Export extends Component {
                 <TableCell numeric>Latitude</TableCell>
                 <TableCell numeric>Longitude</TableCell>
                 <TableCell numeric>Précision (en m)</TableCell>
-                <TableCell numeric>Erreur de mesure (en m)</TableCell>
+                <TableCell numeric>
+                  Ecart position GPS et réelle (en m)
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -93,15 +94,11 @@ class Export extends Component {
           </Table>
         </Paper>
         <br />
-        <Button
-          size="large"
-          variant="contained"
-          color="secondary"
-          onClick={this.handleClickDelete}
-        >
-          Vider le tableau
-          <Delete />
-        </Button>
+
+        <ConfirmerSuppression
+          texte="Vider le tableau"
+          action={this.handleClickDelete}
+        />
       </React.Fragment>
     );
   }

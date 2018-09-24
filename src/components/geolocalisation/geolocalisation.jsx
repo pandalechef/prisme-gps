@@ -203,7 +203,7 @@ class Geolocalisation extends React.Component {
               />
               {this.state.distance2points && (
                 <TextField
-                  label="Erreur distance"
+                  label="Ecart entre position GPS et réelle"
                   value={this.state.distance2points}
                   className={classes.textField}
                   margin="normal"
