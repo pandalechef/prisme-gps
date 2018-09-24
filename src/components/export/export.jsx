@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { CSVLink } from 'react-csv';
-import GetApp from '@material-ui/icons/GetApp';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { CSVLink } from "react-csv";
+import GetApp from "@material-ui/icons/GetApp";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto'
+    overflowX: "auto"
   },
   table: {
     minWidth: 700
@@ -32,19 +32,18 @@ class Export extends Component {
           <Typography variant="headline" component="h3">
             Aucune donnée
           </Typography>
-          <Typography component="p">
-            Il y a rien à exporter!
-          </Typography>
+          <Typography component="p">Il y a rien à exporter!</Typography>
         </Paper>
       );
     }
     const headers = [
-      { label: 'Réseau', key: 'reseau' },
-      { label: 'Cas de test', key: 'casDeTest' },
-      { label: 'Date', key: 'date' },
-      { label: 'Latitude', key: 'latitude' },
-      { label: 'Longitude', key: 'longitude' },
-      { label: 'Précision', key: 'accuracy' }
+      { label: "Réseau", key: "reseau" },
+      { label: "Cas de test", key: "casDeTest" },
+      { label: "Date", key: "date" },
+      { label: "Latitude", key: "latitude" },
+      { label: "Longitude", key: "longitude" },
+      { label: "Précision", key: "accuracy" },
+      { label: "Erreur de Mesure", key: "erreurMesure" }
     ];
     return (
       <React.Fragment>
@@ -68,7 +67,8 @@ class Export extends Component {
                 <TableCell> Date </TableCell>
                 <TableCell numeric>Latitude</TableCell>
                 <TableCell numeric>Longitude</TableCell>
-                <TableCell numeric>Précision (m)</TableCell>
+                <TableCell numeric>Précision (en m)</TableCell>
+                <TableCell numeric>Erreur de mesure (en m)</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -81,6 +81,7 @@ class Export extends Component {
                     <TableCell numeric>{row.latitude}</TableCell>
                     <TableCell numeric>{row.longitude}</TableCell>
                     <TableCell numeric>{row.accuracy}</TableCell>
+                    <TableCell numeric>{row.erreurMesure}</TableCell>
                   </TableRow>
                 );
               })}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CircleMarker, Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import logoPinPerson from './marker-pin-person.svg';
 import L from 'leaflet';
 

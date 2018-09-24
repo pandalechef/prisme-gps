@@ -49,6 +49,12 @@ class SimpleTabs extends React.Component {
     });
   };
 
+  majErreurMesureDernierReleve = (erreurMesure) =>{
+    var releves = [...this.state.releves];
+    releves[releves.length - 1].erreurMesure = erreurMesure
+    this.setState({releves})
+  }
+
   ajouterCasDeTest = nouveauCas => {
     this.setState({ casDeTest: [...this.state.casDeTest, nouveauCas] });
   };
@@ -75,6 +81,7 @@ class SimpleTabs extends React.Component {
               casDeTest={this.state.casDeTest}
               reseau={this.state.reseau}
               ajoutReleve={this.ajoutReleve}
+              majErreurMesureDernierReleve={this.majErreurMesureDernierReleve}
             />
           </TabContainer>}
         {value === 1 &&
