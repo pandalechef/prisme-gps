@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Add from "@material-ui/icons/Add";
-import Delete from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import ConfirmerSuppression from "../confirmer-suppression";
