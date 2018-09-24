@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { CSVLink } from "react-csv";
 import GetApp from "@material-ui/icons/GetApp";
+import Delete from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
@@ -24,6 +25,9 @@ const styles = theme => ({
 });
 
 class Export extends Component {
+  handleClickDelete = () => {
+    this.props.deleteReleves();
+  };
   render() {
     const { classes } = this.props;
     if (this.props.releves.length === 0) {
@@ -88,6 +92,16 @@ class Export extends Component {
             </TableBody>
           </Table>
         </Paper>
+        <br />
+        <Button
+          size="large"
+          variant="contained"
+          color="secondary"
+          onClick={this.handleClickDelete}
+        >
+          Vider le tableau
+          <Delete />
+        </Button>
       </React.Fragment>
     );
   }

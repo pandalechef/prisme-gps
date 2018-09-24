@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Add from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
+import Add from "@material-ui/icons/Add";
+import Delete from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -24,8 +25,8 @@ const styles = theme => ({
 
 class Parametres extends Component {
   state = {
-    nouveauCasTest: '',
-    nouveauReseau: ''
+    nouveauCasTest: "",
+    nouveauReseau: ""
   };
 
   handleChangeNouveauReseau = event => {
@@ -42,6 +43,9 @@ class Parametres extends Component {
 
   handleClick = () => {
     this.props.ajouterCasDeTest(this.state.nouveauCasTest);
+  };
+  handleClickDelete = () => {
+    this.props.deleteAll();
   };
 
   render() {
@@ -87,6 +91,17 @@ class Parametres extends Component {
             <Add />
           </Button>
         </fieldset>
+        <br />
+        <br />
+        <Button
+          size="large"
+          variant="contained"
+          color="secondary"
+          onClick={this.handleClickDelete}
+        >
+          Effacer toutes les données!
+          <Delete />
+        </Button>
       </React.Fragment>
     );
   }

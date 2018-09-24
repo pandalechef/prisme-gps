@@ -28,14 +28,17 @@ const styles = theme => ({
 });
 
 class SimpleTabs extends React.Component {
-  state = {
-    value: 0,
-    releves: [],
-    casDeTest: ["dehors", "bar"],
-    casDeTestChoisi: "dehors",
-    reseau: ["SIM voix+data", "SIM data", "pas de SIM"],
-    reseauChoisi: "SIM voix+data"
-  };
+  state =
+    JSON.parse(localStorage.getItem("prisme-gps")) === null
+      ? {
+          value: 0,
+          releves: [],
+          casDeTest: ["dehors", "bar"],
+          casDeTestChoisi: "dehors",
+          reseau: ["SIM voix+data", "SIM data", "pas de SIM"],
+          reseauChoisi: "SIM voix+data"
+        }
+      : JSON.parse(localStorage.getItem("prisme-gps"));
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -43,12 +46,12 @@ class SimpleTabs extends React.Component {
 
   ajoutReleve = (reseau, casDeTest, latitude, longitude, accuracy) => {
     const date = new Date().toLocaleString();
-    this.setState({
-      releves: [
-        ...this.state.releves,
-        { reseau, casDeTest, latitude, longitude, accuracy, date }
-      ]
-    });
+    const releves = [
+      ...this.state.releves,
+      { reseau, casDeTest, latitude, longitude, accuracy, date }
+    ];
+    this.setState({ releves });
+    this.majLocalStorage("releves", releves);
   };
 
   majErreurMesureDernierReleve = erreurMesure => {
@@ -59,16 +62,64 @@ class SimpleTabs extends React.Component {
 
   majCasDeTestChoisi = casDeTestChoisi => {
     this.setState({ casDeTestChoisi });
+    this.majLocalStorage("casDeTestChoisi", casDeTestChoisi);
   };
   majReseauChoisi = reseauChoisi => {
     this.setState({ reseauChoisi });
+    this.majLocalStorage("reseauChoisi", reseauChoisi);
   };
 
   ajouterCasDeTest = nouveauCas => {
-    this.setState({ casDeTest: [...this.state.casDeTest, nouveauCas] });
+    const casDeTest = [...this.state.casDeTest, nouveauCas];
+    this.setState({ casDeTest });
+    this.majLocalStorage("casDeTest", casDeTest);
   };
   ajouterReseau = nouveauReseau => {
-    this.setState({ reseau: [...this.state.reseau, nouveauReseau] });
+    const reseau = [...this.state.reseau, nouveauReseau];
+    this.setState({ reseau });
+    this.majLocalStorage("reseau", reseau);
+  };
+
+  majLocalStorage = (libelle, valeur) => {
+    const stateLocalStorage = JSON.parse(localStorage.getItem("prisme-gps"));
+    if (stateLocalStorage === null) {
+      const stateAAjouter = {
+        value: 0,
+        releves: [],
+        casDeTest: ["dehors", "bar"],
+        casDeTestChoisi: "dehors",
+        reseau: ["SIM voix+data", "SIM data", "pas de SIM"],
+        reseauChoisi: "SIM voix+data"
+      };
+      stateAAjouter[libelle] = valeur;
+      console.log(stateAAjouter);
+
+      localStorage.setItem("prisme-gps", JSON.stringify(stateAAjouter));
+    } else {
+      stateLocalStorage[libelle] = valeur;
+      localStorage.setItem("prisme-gps", JSON.stringify(stateLocalStorage));
+    }
+  };
+
+  deleteReleves = () => {
+    const stateLocalStorage = JSON.parse(localStorage.getItem("prisme-gps"));
+    if (stateLocalStorage !== null) {
+      stateLocalStorage["releves"] = [];
+      localStorage.setItem("prisme-gps", JSON.stringify(stateLocalStorage));
+    }
+    this.setState({ releves: [] });
+  };
+
+  deleteAll = () => {
+    localStorage.removeItem("prisme-gps");
+    this.setState({
+      value: 2,
+      releves: [],
+      casDeTest: ["dehors", "bar"],
+      casDeTestChoisi: "dehors",
+      reseau: ["SIM voix+data", "SIM data", "pas de SIM"],
+      reseauChoisi: "SIM voix+data"
+    });
   };
 
   render() {
@@ -100,7 +151,10 @@ class SimpleTabs extends React.Component {
         )}
         {value === 1 && (
           <TabContainer>
-            <Export releves={this.state.releves} />
+            <Export
+              releves={this.state.releves}
+              deleteReleves={this.deleteReleves}
+            />
           </TabContainer>
         )}
         {value === 2 && (
@@ -108,6 +162,7 @@ class SimpleTabs extends React.Component {
             <Parametres
               ajouterCasDeTest={this.ajouterCasDeTest}
               ajouterReseau={this.ajouterReseau}
+              deleteAll={this.deleteAll}
             />
           </TabContainer>
         )}
