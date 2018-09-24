@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { Component } from "react";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class CasTest extends Component {
   state = {
-    castest: 0
+    castest: this.props.casDeTest.indexOf(this.props.casDeTestChoisi)
   };
 
   handleChangeSelect = event => {
@@ -21,14 +21,15 @@ class CasTest extends Component {
           value={this.state.castest}
           onChange={this.handleChangeSelect}
           inputProps={{
-            name: 'castest',
-            id: 'castest'
+            name: "castest",
+            id: "castest"
           }}
         >
           {this.props.casDeTest.map((cas, index) => (
-            <MenuItem key={index} value={index}>{cas}</MenuItem>
+            <MenuItem key={index} value={index}>
+              {cas}
+            </MenuItem>
           ))}
-
         </Select>
         <br />
       </FormControl>

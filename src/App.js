@@ -32,7 +32,9 @@ class SimpleTabs extends React.Component {
     value: 0,
     releves: [],
     casDeTest: ["dehors", "bar"],
-    reseau: ["SIM voix+data", "SIM data", "pas de SIM"]
+    casDeTestChoisi: "dehors",
+    reseau: ["SIM voix+data", "SIM data", "pas de SIM"],
+    reseauChoisi: "SIM voix+data"
   };
 
   handleChange = (event, value) => {
@@ -53,6 +55,13 @@ class SimpleTabs extends React.Component {
     var releves = [...this.state.releves];
     releves[releves.length - 1].erreurMesure = erreurMesure;
     this.setState({ releves });
+  };
+
+  majCasDeTestChoisi = casDeTestChoisi => {
+    this.setState({ casDeTestChoisi });
+  };
+  majReseauChoisi = reseauChoisi => {
+    this.setState({ reseauChoisi });
   };
 
   ajouterCasDeTest = nouveauCas => {
@@ -79,8 +88,12 @@ class SimpleTabs extends React.Component {
           <TabContainer>
             <Geolocalisation
               casDeTest={this.state.casDeTest}
+              casDeTestChoisi={this.state.casDeTestChoisi}
               reseau={this.state.reseau}
+              reseauChoisi={this.state.reseauChoisi}
               ajoutReleve={this.ajoutReleve}
+              majCasDeTestChoisi={this.majCasDeTestChoisi}
+              majReseauChoisi={this.majReseauChoisi}
               majErreurMesureDernierReleve={this.majErreurMesureDernierReleve}
             />
           </TabContainer>

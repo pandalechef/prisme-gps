@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const styles = theme => ({
   root: {},
@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class CasTest extends Component {
   state = {
-    reseau: 0
+    reseau: this.props.reseau.indexOf(this.props.reseauChoisi)
   };
 
   handleChangeSelect = event => {
@@ -37,14 +37,15 @@ class CasTest extends Component {
           value={this.state.reseau}
           onChange={this.handleChangeSelect}
           inputProps={{
-            name: 'reseau',
-            id: 'reseau'
+            name: "reseau",
+            id: "reseau"
           }}
         >
           {this.props.reseau.map((reseau, index) => (
-            <MenuItem key={index} value={index}>{reseau}</MenuItem>
+            <MenuItem key={index} value={index}>
+              {reseau}
+            </MenuItem>
           ))}
-
         </Select>
         <br />
       </FormControl>

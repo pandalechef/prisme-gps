@@ -36,8 +36,8 @@ class Geolocalisation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      casDeTest: this.props.casDeTest[0],
-      reseau: this.props.reseau[0],
+      casDeTest: this.props.casDeTestChoisi,
+      reseau: this.props.reseauChoisi,
       latitude: undefined,
       longitude: undefined,
       accuracy: undefined,
@@ -99,10 +99,12 @@ class Geolocalisation extends React.Component {
 
   majCasDeTest(casDeTest) {
     this.setState({ casDeTest });
+    this.props.majCasDeTestChoisi(casDeTest);
   }
 
   majReseau(reseau) {
     this.setState({ reseau });
+    this.props.majReseauChoisi(reseau);
   }
 
   onMajPosReelle(lat, lng) {
@@ -143,8 +145,13 @@ class Geolocalisation extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Reseau reseau={this.props.reseau} majReseau={this.majReseau} />
+        <Reseau
+          reseauChoisi={this.props.reseauChoisi}
+          reseau={this.props.reseau}
+          majReseau={this.majReseau}
+        />
         <CasTest
+          casDeTestChoisi={this.props.casDeTestChoisi}
           casDeTest={this.props.casDeTest}
           majCasDeTest={this.majCasDeTest}
         />
