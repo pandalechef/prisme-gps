@@ -84,7 +84,7 @@ class Geolocalisation extends React.Component {
       this.state.casDeTest,
       crd.latitude,
       crd.longitude,
-      crd.accuracy
+      Math.round(crd.accuracy)
     );
   }
 
